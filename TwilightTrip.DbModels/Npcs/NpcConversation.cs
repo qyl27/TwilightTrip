@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TwilightTrip.Utilities.Enumerates;
+using TwilightTrip.DbModels.Enumerates;
+using TwilightTrip.DbModels.Missions;
 
 namespace TwilightTrip.DbModels.Npcs
 {

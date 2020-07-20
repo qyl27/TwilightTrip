@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using TwilightTrip.DbModels.Player;
+using TwilightTrip.DbModels.Enumerates;
 
-namespace TwilightTrip.DbModels.Missions
+namespace TwilightTrip.DbModels.Missions.Rewards
 {
-    public class ItemReward
+    public class MissionRewardBase
     {
         [Key]
         public int Id { get; set; }
 
         public List<Mission> Missions { get; set; }
 
-        public Item Item { get; set; }
-
-        public int Count { get; set; }
+        public MissionRewardType Type { get; set; }
     }
 }

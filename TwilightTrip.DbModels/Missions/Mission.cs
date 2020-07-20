@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using TwilightTrip.DbModels.Missions.Rewards;
 
 namespace TwilightTrip.DbModels.Missions
 {
@@ -16,10 +17,6 @@ namespace TwilightTrip.DbModels.Missions
 
         public Mission Next { get; set; }
 
-        public List<ItemReward> Rewards { get; set; }
-
-        public int ExperiencesReward { get; set; }
-
-        public decimal MoneyReward { get; set; }
+        public List<MissionRewardBase> Rewards { get; set; }
     }
 }

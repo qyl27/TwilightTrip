@@ -19,6 +19,13 @@ namespace TwilightTrip.DbModels.Player
         [Required]
         public bool Tradable { get; set; }
 
-        public bool 
+        [Required]
+        public bool Usable { get; set; }
+
+        [Required]
+        public bool Reusable { get; set; }
+
+        [Required]
+        public decimal Worth { get; set; }
     }
 }
