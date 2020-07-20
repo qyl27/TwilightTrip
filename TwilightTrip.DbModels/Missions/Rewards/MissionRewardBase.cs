@@ -4,13 +4,14 @@ using TwilightTrip.DbModels.Enumerates;
 
 namespace TwilightTrip.DbModels.Missions.Rewards
 {
-    public class MissionRewardBase
+    public abstract class MissionRewardBase
     {
         [Key]
         public int Id { get; set; }
 
         public List<Mission> Missions { get; set; }
 
+        [Required]
         public MissionRewardType Type { get; set; }
     }
 }

@@ -1,24 +1,17 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using TwilightTrip.DbModels.Enumerates;
-using TwilightTrip.DbModels.Missions;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace TwilightTrip.DbModels.Npcs
 {
     public class NpcConversation
     {
-        [Key]
-        public int Id { get; set; }
-
+        public int NpcId { get; set; }
+        
         [Required]
-        public Npc Owner { get; set; }
-
-        public NpcConversationType Type { get; set; }
-
-        public string Content { get; set; }
-
-        public List<NpcOption> Options { get; set; }
-
-        public List<Mission> Mission { get; set; }
+        public Npc Npc { get; set; }
+        
+        public int ConversationId { get; set; }
+        
+        [Required]
+        public Conversation Conversation { get; set; }
     }
 }
