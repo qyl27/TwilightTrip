@@ -13,6 +13,10 @@ namespace TwilightTrip.DbModels
 
         public DbSet<Sense> Senses { get; set; }
         public DbSet<SenseLink> SenseLinks { get; set; }
+        
+        public DbSet<Npc> Npcs { get; set; }
+        public DbSet<Conversation> Conversations { get; set; }
+        public DbSet<Option> Options { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -25,21 +29,16 @@ namespace TwilightTrip.DbModels
             
             builder.Entity<SenseLink>();
 
-            builder.Entity<Npc>();
+            builder.Entity<Npc>()
+                .HasMany(n => n.Talks)
+                .WithOne(c => c.Owner);
 
-            builder.Entity<Conversation>();
+            builder.Entity<Conversation>()
+                .HasMany(c => c.Options)
+                .WithOne(o => o.Owner);
 
-            builder.Entity<NpcConversation>()
-                .HasKey(nc => new { nc.NpcId, nc.ConversationId });
-            builder.Entity<NpcConversation>()
-                .HasOne(nc => nc.Npc)
-                .WithMany(n => n.Talks)
-                .HasForeignKey(nc => nc.NpcId);
-            builder.Entity<NpcConversation>()
-                .HasOne(nc => nc.Conversation)
-                .WithMany(c => c.Owner)
-                .HasForeignKey(nc => nc.ConversationId);
-            
+            builder.Entity<Option>();
+
         }
     }
 }

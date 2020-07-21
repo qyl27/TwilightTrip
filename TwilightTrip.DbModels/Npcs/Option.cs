@@ -2,13 +2,13 @@
 
 namespace TwilightTrip.DbModels.Npcs
 {
-    public class NpcOption
+    public class Option
     {
         [Key]
         public int Id { get; set; }
         
         [Required]
-        public string Option { get; set; }
+        public string InOption { get; set; }
 
         [Required]
         public Conversation Owner { get; set; }

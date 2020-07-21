@@ -11,7 +11,7 @@ namespace TwilightTrip.DbModels.Npcs
         public int Id { get; set; }
 
         [Required]
-        public List<NpcConversation> Owner { get; set; }
+        public Npc Owner { get; set; }
 
         [Required]
         public NpcConversationType Type { get; set; }
@@ -19,7 +19,7 @@ namespace TwilightTrip.DbModels.Npcs
         [Required]
         public string Content { get; set; }
 
-        public List<NpcOption> Options { get; set; }
+        public List<Option> Options { get; set; }
 
         public Mission Mission { get; set; }
     }

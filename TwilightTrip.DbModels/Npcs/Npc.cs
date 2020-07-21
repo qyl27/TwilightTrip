@@ -21,7 +21,7 @@ namespace TwilightTrip.DbModels.Npcs
         [Required]
         public Sense AtSense { get; set; }
         
-        public List<NpcConversation> Talks { get; set; }
+        public List<Conversation> Talks { get; set; }
         
     }
 }
