@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using TwilightTrip.DbModels.Player;
+using TwilightTrip.DbModels.Players;
 
 namespace TwilightTrip.DbModels.Missions.Rewards
 {

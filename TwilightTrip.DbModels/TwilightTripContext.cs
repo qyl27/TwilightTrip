@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using TwilightTrip.DbModels.Enumerates;
+using TwilightTrip.DbModels.Missions;
+using TwilightTrip.DbModels.Missions.Rewards;
 using TwilightTrip.DbModels.Npcs;
 using TwilightTrip.DbModels.Senses;
 
@@ -17,28 +20,61 @@ namespace TwilightTrip.DbModels
         public DbSet<Npc> Npcs { get; set; }
         public DbSet<Conversation> Conversations { get; set; }
         public DbSet<Option> Options { get; set; }
+        
+        public DbSet<Mission> Missions { get; set; }
+        
+        public DbSet<MissionRewardBase> Rewards { get; set; }
+        public DbSet<ItemReward> ItemRewards { get; set; }
+        public DbSet<ExperiencesReward> ExperiencesRewards { get; set; }
+        public DbSet<MoneyReward> MoneyRewards { get; set; }
+        public DbSet<PointsReward> PointsRewards { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Sense>()
                 .HasMany(s => s.Links)
-                .WithOne(l => l.Sense);
+                .WithOne(l => l.Sense)
+                .IsRequired();
             builder.Entity<Sense>()
                 .HasMany(s => s.Npcs)
-                .WithOne(n => n.AtSense);
+                .WithOne(n => n.AtSense)
+                .IsRequired();
             
-            builder.Entity<SenseLink>();
+            builder.Entity<SenseLink>()
+                .HasOne(l => l.ToSense)
+                .WithOne()
+                .IsRequired();
 
             builder.Entity<Npc>()
                 .HasMany(n => n.Talks)
-                .WithOne(c => c.Owner);
+                .WithOne(c => c.Owner)
+                .IsRequired();
 
             builder.Entity<Conversation>()
                 .HasMany(c => c.Options)
-                .WithOne(o => o.Owner);
+                .WithOne(o => o.From)
+                .IsRequired();
+            builder.Entity<Conversation>()
+                .HasOne(c => c.Mission)
+                .WithOne(m => m.StartWith)
+                .IsRequired();
 
-            builder.Entity<Option>();
+            builder.Entity<Option>()
+                .HasOne(o => o.Then)
+                .WithOne(c => c.From)
+                .IsRequired();
 
+            builder.Entity<Mission>()
+                .HasOne(m => m.Next)
+                .WithOne(n => n.Prev)
+                .IsRequired();
+
+            builder.Entity<MissionRewardBase>()
+                .HasDiscriminator(r => r.Type)
+                .HasValue<ItemReward>(MissionRewardType.Item)
+                .HasValue<ExperiencesReward>(MissionRewardType.Experience)
+                .HasValue<MoneyReward>(MissionRewardType.Money)
+                .HasValue<PointsReward>(MissionRewardType.Points);
         }
     }
 }

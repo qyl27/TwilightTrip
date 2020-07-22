@@ -11,7 +11,7 @@ namespace TwilightTrip.DbModels.Npcs
         public string InOption { get; set; }
 
         [Required]
-        public Conversation Owner { get; set; }
+        public Conversation From { get; set; }
 
         [Required]
         public Conversation Then { get; set; }

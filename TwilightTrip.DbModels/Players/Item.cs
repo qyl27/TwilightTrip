@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TwilightTrip.DbModels.Player
+namespace TwilightTrip.DbModels.Players
 {
     public class Item
     {

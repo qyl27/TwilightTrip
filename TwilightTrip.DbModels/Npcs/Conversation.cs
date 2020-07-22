@@ -19,6 +19,8 @@ namespace TwilightTrip.DbModels.Npcs
         [Required]
         public string Content { get; set; }
 
+        public Option From { get; set; }
+        
         public List<Option> Options { get; set; }
 
         public Mission Mission { get; set; }
