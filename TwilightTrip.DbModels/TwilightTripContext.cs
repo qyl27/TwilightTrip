@@ -16,6 +16,9 @@ namespace TwilightTrip.DbModels
         }
         
         public DbSet<Item> Items { get; set; }
+        
+        public DbSet<Player> Players { get; set; }
+        public DbSet<Home> Homes { get; set; }
 
         public DbSet<Sense> Senses { get; set; }
         public DbSet<SenseLink> SenseLinks { get; set; }
@@ -34,8 +37,12 @@ namespace TwilightTrip.DbModels
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Item>();
-            
+            base.OnModelCreating(builder);
+
+            builder.Entity<Player>()
+                .HasMany(p => p.Inventory)
+                .WithOne();
+
             builder.Entity<Sense>()
                 .HasMany(s => s.Links)
                 .WithOne(l => l.Sense)
