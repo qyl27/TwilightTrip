@@ -9,7 +9,7 @@ namespace TwilightTrip.DbModels.Missions.Rewards
         [Key]
         public int Id { get; set; }
 
-        public List<Mission> Missions { get; set; }
+        public Mission Mission { get; set; }
 
         [Required]
         public MissionRewardType Type { get; set; }

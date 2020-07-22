@@ -3,6 +3,7 @@ using TwilightTrip.DbModels.Enumerates;
 using TwilightTrip.DbModels.Missions;
 using TwilightTrip.DbModels.Missions.Rewards;
 using TwilightTrip.DbModels.Npcs;
+using TwilightTrip.DbModels.Players;
 using TwilightTrip.DbModels.Senses;
 
 namespace TwilightTrip.DbModels
@@ -13,6 +14,8 @@ namespace TwilightTrip.DbModels
             : base(options)
         {
         }
+        
+        public DbSet<Item> Items { get; set; }
 
         public DbSet<Sense> Senses { get; set; }
         public DbSet<SenseLink> SenseLinks { get; set; }
@@ -31,6 +34,8 @@ namespace TwilightTrip.DbModels
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Item>();
+            
             builder.Entity<Sense>()
                 .HasMany(s => s.Links)
                 .WithOne(l => l.Sense)
@@ -68,6 +73,10 @@ namespace TwilightTrip.DbModels
                 .HasOne(m => m.Next)
                 .WithOne(n => n.Prev)
                 .IsRequired();
+            builder.Entity<Mission>()
+                .HasMany(m => m.Rewards)
+                .WithOne(r => r.Mission)
+                .IsRequired();
 
             builder.Entity<MissionRewardBase>()
                 .HasDiscriminator(r => r.Type)
@@ -75,6 +84,15 @@ namespace TwilightTrip.DbModels
                 .HasValue<ExperiencesReward>(MissionRewardType.Experience)
                 .HasValue<MoneyReward>(MissionRewardType.Money)
                 .HasValue<PointsReward>(MissionRewardType.Points);
+            builder.Entity<MissionRewardBase>()
+                .HasOne(r => r.Mission)
+                .WithMany()
+                .IsRequired();
+            
+            builder.Entity<ItemReward>()
+                .HasOne(i => i.Item)
+                .WithOne()
+                .IsRequired();
         }
     }
 }
