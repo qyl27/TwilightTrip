@@ -2,9 +2,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace TwilightTrip.DbModels.Senses
+namespace TwilightTrip.DbModels.Players
 {
-    public class Sense
+    public class Player
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,8 +14,10 @@ namespace TwilightTrip.DbModels.Senses
         [Required]
         public string Name { get; set; }
         
-        public List<SenseLink> OutcomeLink { get; set; }
-        
-        public List<SenseLink> IncomeLink { get; set; }
+        [Required]
+        public string Bio { get; set; }
+
+        [Required]
+        public List<ItemStack> Inventory { get; set; }
     }
 }

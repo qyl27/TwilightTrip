@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TwilightTrip.DbModels.Senses
 {
-    public class Sense
+    public class SenseLink
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,10 +11,9 @@ namespace TwilightTrip.DbModels.Senses
         public int Id { get; set; }
         
         [Required]
-        public string Name { get; set; }
+        public Sense FromSense { get; set; }
         
-        public List<SenseLink> OutcomeLink { get; set; }
-        
-        public List<SenseLink> IncomeLink { get; set; }
+        [Required]
+        public Sense ToSense { get; set; }
     }
 }
